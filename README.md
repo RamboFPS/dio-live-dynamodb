@@ -74,6 +74,18 @@ aws dynamodb update-table \
         "[{\"Create\":{\"IndexName\": \"SongTitleYear-index\",\"KeySchema\":[{\"AttributeName\":\"SongTitle\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"SongYear\",\"KeyType\":\"RANGE\"}], \
         \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
 ```
+- Criar um index global secundário baseado no compositor e título da música 
+
+```
+aws dynamodb update-table \
+    --table-name Music \
+    --attribute-definitions\
+        AttributeName=Composer,AttributeType=S \
+        AttributeName=SongTitle,AttributeType=S \
+    --global-secondary-index-updates \
+        "[{\"Create\":{\"IndexName\": \"Composer-index\",\"KeySchema\":[{\"AttributeName\":\"Composer\",\"KeyType\":\"HASH\"}, {\"AttributeName\":\"SongTitle\",\"KeyType\":\"RANGE\"}], \
+        \"ProvisionedThroughput\": {\"ReadCapacityUnits\": 10, \"WriteCapacityUnits\": 5      },\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"
+```
 
 - Pesquisar item por artista
 
