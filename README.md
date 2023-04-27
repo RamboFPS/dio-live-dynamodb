@@ -121,3 +121,12 @@ aws dynamodb query \
     --key-condition-expression "SongTitle = :v_song and SongYear = :v_year" \
     --expression-attribute-values  '{":v_song":{"S":"Wasting Love"},":v_year":{"S":"1992"} }'
 ```
+- Pesquisa pelo index secundário baseado no Compositor
+
+```
+aws dynamodb query \
+    --table-name Music \
+    --index-name Composer-index \
+    --key-condition-expression "Composer = :v_composer and SongTitle = :v_song" \
+    --expression-attribute-values  '{":v_composer":{"S":"Bruce Dickinson and Janick Gers"},":v_song":{"S":"Fear of the Dark"} }'
+```
